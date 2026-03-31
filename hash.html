@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Talha Khan (hash) | // WEB EXPLOITATOR // RED TEAM //</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(circle at 30% 10%, #0a0202 0%, #000000 100%);
+      background-attachment: fixed;
+      font-family: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+      color: #e0e0e0;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1a0101;
+      border-left: 1px solid #ff2a2a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ff2a2a;
+      border-radius: 10px;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* ========= GLITCH / NEON ELEMENTS ========= */
+    .neon-card {
+      background: #0b0b0bdd;
+      backdrop-filter: blur(3px);
+      border: 1.5px solid #ff2a2a;
+      border-radius: 28px;
+      box-shadow: 0 0 14px rgba(255, 0, 0, 0.4), inset 0 0 4px rgba(255, 0, 0, 0.2);
+      transition: all 0.25s ease;
+    }
+    .neon-card:hover {
+      box-shadow: 0 0 24px rgba(255, 40, 40, 0.7);
+      border-color: #ff6060;
+    }
+
+    /* header / nav cyber */
+    .cyber-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem 0 2rem 0;
+      border-bottom: 2px solid #ff2a2a;
+      margin-bottom: 2rem;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, #ff1a4f, #ff5500);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 8px #ff003c;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: #ff8a8a;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a:hover {
+      color: #ff3333;
+      text-shadow: 0 0 6px red;
+      border-bottom-color: #ff3333;
+    }
+
+    /* hero section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+    .glitch {
+      font-size: 3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #ff3a3a, #ff8800);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px #ff000066;
+      letter-spacing: -1px;
+    }
+    .name-sub {
+      font-size: 1rem;
+      color: #ff8888;
+      margin-top: -0.5rem;
+      margin-bottom: 0.5rem;
+      border-left: 3px solid #ff4444;
+      padding-left: 1rem;
+    }
+    .typed-container {
+      font-size: 1.4rem;
+      border-left: 4px solid #ff3a3a;
+      padding-left: 1.2rem;
+      margin: 0.5rem 0;
+    }
+    #typed-output {
+      color: #ffaa88;
+      text-shadow: 0 0 5px #ff3a3a;
+    }
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      margin-left: 5px;
+      animation: blink 1s step-end infinite;
+      color: #ff4444;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .bio {
+      font-size: 1rem;
+      max-width: 700px;
+      color: #ccbbbb;
+    }
+    .badge-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.8rem;
+    }
+    .badge {
+      background: #1f0505;
+      border: 1px solid #ff5e5e;
+      border-radius: 40px;
+      padding: 0.3rem 1rem;
+      font-size: 0.7rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* section titles */
+    .section-title {
+      font-size: 2rem;
+      margin: 2rem 0 1.5rem 0;
+      border-left: 6px solid #ff3a3a;
+      padding-left: 1rem;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      text-shadow: 0 0 5px #ff0000;
+    }
+
+    /* about grid */
+    .about-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 1.8rem;
+    }
+    .about-text {
+      flex: 2;
+    }
+    .about-text p {
+      margin-bottom: 1rem;
+    }
+    .creds {
+      flex: 1;
+      background: #0a0000aa;
+      border-radius: 24px;
+      padding: 1rem;
+      border: 1px solid #ff4a4a;
+    }
+    .creds h3 {
+      color: #ff7b7b;
+      margin-bottom: 0.8rem;
+    }
+    .creds ul {
+      list-style: none;
+    }
+    .creds li {
+      margin: 0.7rem 0;
+      font-size: 0.85rem;
+    }
+
+    /* skills tags */
+    .skills-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+    .skill-tag {
+      background: #0f0000;
+      border: 1px solid #ff4d4d;
+      border-radius: 50px;
+      padding: 0.6rem 1.2rem;
+      font-weight: bold;
+      transition: 0.2s;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .skill-tag:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 12px red;
+      background: #1f0404;
+      border-color: #ff8888;
+    }
+
+    /* projects grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin: 1.5rem 0;
+    }
+    .project-card {
+      background: #0c0c0cee;
+      border-radius: 24px;
+      padding: 1.5rem;
+      transition: all 0.3s;
+      border: 1px solid #ff3a3a;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.5);
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: #ff7a7a;
+      box-shadow: 0 0 20px #ff000044;
+    }
+    .project-title {
+      font-size: 1.4rem;
+      color: #ff7a7a;
+      margin-bottom: 0.5rem;
+    }
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 0.8rem 0;
+    }
+    .tech-badge {
+      background: #1f0101;
+      border-radius: 20px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.7rem;
+      border: 1px solid #ff5e5e;
+    }
+    .project-desc {
+      font-size: 0.85rem;
+      color: #cdcdcd;
+    }
+
+    /* contact section */
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .contact-item {
+      background: #0a0000;
+      border: 1px solid #ff4a4a;
+      border-radius: 60px;
+      padding: 0.8rem 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #ffb3b3;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    .contact-item:hover {
+      background: #ff1a1a20;
+      box-shadow: 0 0 14px red;
+      border-color: #ff9999;
+      transform: scale(1.02);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      border-top: 1px solid #ff3a3a;
+      font-size: 0.7rem;
+      color: #ff6a6a;
+    }
+
+    /* offensive accent */
+    .red-glow {
+      text-shadow: 0 0 4px #ff0000;
+    }
+    .attack-vector {
+      border-left: 3px solid #ff0000;
+      padding-left: 0.8rem;
+      margin: 1rem 0;
+    }
+
+    @media (max-width: 700px) {
+      .glitch {
+        font-size: 1.8rem;
+      }
+      .container {
+        padding: 1rem;
+      }
+      .hero {
+        padding: 1rem;
+      }
+      .section-title {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- navigation terminal style -->
+  <div class="cyber-nav">
+    <div class="logo">[ root@exploit:~ ]# </div>
+    <div class="nav-links">
+      <a href="#home">// HOME</a>
+      <a href="#about">// ABOUT</a>
+      <a href="#skills">// SKILLS</a>
+      <a href="#projects">// PROJECTS</a>
+      <a href="#contact">// CONTACT</a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home">
+    <div class="neon-card hero">
+      <h1 class="glitch">TALHA KHAN (HASH)</h1>
+      <div class="name-sub">alias: hash_089 // web pentester & red team operator</div>
+      <div class="typed-container">
+        <span id="typed-output"></span><span class="cursor">_</span>
+      </div>
+      <p class="bio"><span class="red-glow">⚔️ WEB PENTESTER | RED TEAM OPERATOR ⚔️</span><br>
+      CEH | CAISR | CRTOM. Pure offensive mindset — breaking web apps, bypassing WAFs, and breaching perimeters. Currently serving as <strong>Red Teamer at Ultrasecure</strong>, specializing in web exploitation and adversary simulation.</p>
+      <div class="badge-row">
+        <span class="badge">🎯 Red Teamer @ Ultrasecure</span>
+        <span class="badge">🌐 Web Penstester</span>
+        <span class="badge">⚡ CEH Certified</span>
+        <span class="badge">🔐 CAISR</span>
+        <span class="badge">🛡️ CRTOM</span>
+        <span class="badge">🐍 Python | Bash | C++</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section - Web Pentester Focus -->
+  <section id="about">
+    <h2 class="section-title">>_ web_exploitator_profile.exe</h2>
+    <div class="neon-card about-grid">
+      <div class="about-text">
+        <p>🔴 <strong class="red-glow">I break web applications for a living.</strong> I'm <strong>Talha Khan (hash)</strong>, a <strong class="red-glow">Web Pentester</strong> and Red Team operator. My expertise lies in finding and exploiting web vulnerabilities — SQLi, XSS, SSTI, SSRF, deserialization bugs, and chaining them for full compromise.</p>
+        <div class="attack-vector">
+          <p>🎯 <strong>Current Role:</strong> Red Teamer at <strong class="red-glow">Ultrasecure</strong> — conducting web application penetration tests, API abuse, phishing campaigns, and C2 infrastructure management. I specialize in bypassing WAFs and modern defenses.</p>
+        </div>
+        <p>💀 My journey started at <strong>National University of Computer and Emerging Sciences (FAST)</strong>, where I fell in love with breaking web security. I've pwned countless web apps, from small startups to enterprise systems.</p>
+        <p>⚡ <strong>Web exploitation arsenal:</strong> Burp Suite mastery, custom exploit scripts, WAF evasion, parameter pollution, race conditions, and chain exploitation. I speak HTTP fluently.</p>
+      </div>
+      <div class="creds">
+        <h3>📡 // offensive credentials</h3>
+        <ul>
+          <li>➤ <strong class="red-glow">Red Teamer @ Ultrasecure</strong> (current)</li>
+          <li>➤ <strong class="red-glow">Web Exploitator</strong> — bug hunter</li>
+          <li>➤ CEH (Certified Ethical Hacker)</li>
+          <li>➤ CAISR (Cyber AI & Security Researcher)</li>
+          <li>➤ CRTOM (Certified Red Team Ops Master)</li>
+          <li>➤ BSCS @ National University of C&ES</li>
+          <li>➤ Specialized: Web App Pen Testing, API Hacking</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section - Web Exploitation Focus -->
+  <section id="skills">
+    <h2 class="section-title">>_ web_exploitation_arsenal</h2>
+    <div class="neon-card skills-wrapper">
+      <div class="skill-tag">🌐 Web Exploitation</div>
+      <div class="skill-tag">🐍 Python (exploit dev)</div>
+      <div class="skill-tag">⚙️ Bash (automation)</div>
+      <div class="skill-tag">🕸️ SQL Injection (all types)</div>
+      <div class="skill-tag">💀 XSS | SSTI | CSRF</div>
+      <div class="skill-tag">🔐 SSRF | XXE | IDOR</div>
+      <div class="skill-tag">🔥 Burp Suite (pro level)</div>
+      <div class="skill-tag">📡 SQLmap | Nmap</div>
+      <div class="skill-tag">🧬 WAF Evasion techniques</div>
+      <div class="skill-tag">📜 API Hacking & GraphQL</div>
+      <div class="skill-tag">🎯 Red Teaming</div>
+      <div class="skill-tag">💀 C2 Frameworks</div>
+    </div>
+  </section>
+
+  <!-- Projects Section - Web Exploitation Focus -->
+  <section id="projects">
+    <h2 class="section-title">>_ web_exploit_projects</h2>
+    <div class="projects-grid">
+      <!-- project 1: DoS Tools in Bash -->
+      <div class="project-card">
+        <div class="project-title">💀 DoS_TOOLKIT (BASH)</div>
+        <div class="project-tech">
+          <span class="tech-badge">Bash</span>
+          <span class="tech-badge">Networking</span>
+          <span class="tech-badge">Socket</span>
+        </div>
+        <div class="project-desc">Collection of Denial-of-Service attack scripts written in pure Bash. Includes SYN flood, HTTP flood, and UDP amplification techniques for stress testing web apps.</div>
+      </div>
+      <!-- project 2: SubHunter -->
+      <div class="project-card">
+        <div class="project-title">🔍 SUBHUNTER</div>
+        <div class="project-tech">
+          <span class="tech-badge">Bash</span>
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">DNS Enum</span>
+        </div>
+        <div class="project-desc">Automated subdomain enumeration tool that leverages multiple OSINT sources, brute-force wordlists, and DNS resolution to discover hidden attack surfaces for web targets.</div>
+      </div>
+      <!-- project 3: Pentest Checklist -->
+      <div class="project-card">
+        <div class="project-title">📋 PENTEST_CHECKLIST</div>
+        <div class="project-tech">
+          <span class="tech-badge">Markdown</span>
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Reporting</span>
+        </div>
+        <div class="project-desc">Comprehensive web penetration testing methodology framework. Covers recon → web vuln scanning → exploitation → post-exploit → reporting phases with OWASP Top 10 mapping.</div>
+      </div>
+      <!-- project 4: WAF_BYPASS_LAB -->
+      <div class="project-card">
+        <div class="project-title">🧬 WAF_BYPASS_LAB</div>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">SQLi</span>
+          <span class="tech-badge">Encoding</span>
+        </div>
+        <div class="project-desc">Advanced WAF bypass techniques collection. Includes SQL injection obfuscation, case manipulation, comment nesting, and HTTP parameter pollution to bypass modern WAFs.</div>
+      </div>
+      <!-- project 5: SQLi_AUTOMATOR -->
+      <div class="project-card">
+        <div class="project-title">🗄️ SQLi_AUTOMATOR</div>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">SQLmap</span>
+          <span class="tech-badge">Custom Payloads</span>
+        </div>
+        <div class="project-desc">Automated SQL injection exploitation tool with time-based blind, error-based, and boolean techniques. Features custom payload generator and database extraction modules.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section - PGP line removed -->
+  <section id="contact">
+    <h2 class="section-title">>_ contact_web_exploitator</h2>
+    <div class="neon-card" style="padding: 1rem 0 2rem 0;">
+      <div class="contact-links">
+        <a href="mailto:talhakhan12021@gmail.com" class="contact-item">📧 EMAIL // talhakhan12021@gmail.com</a>
+        <a href="https://github.com/hash-089" class="contact-item" target="_blank">🐙 GITHUB // /hash-089</a>
+        <a href="https://www.linkedin.com/in/hash-tk" class="contact-item" target="_blank">🔗 LINKEDIN // /in/hash-tk</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Talha Khan (hash) // Web Exploitator & Red Teamer @ Ultrasecure // $>_ break.web.pwn.all // [v2.0 - web exploit edition]</span>
+  </footer>
+</div>
+
+<script>
+  // TYPING ANIMATION - Web Exploitator Focus
+  const phrases = [
+    ">_ Web Exploitator //",
+    ">_ Breaking web apps daily //",
+    ">_ Red Teamer @ Ultrasecure //",
+    ">_ SQLi | XSS | SSTI | SSRF //",
+    ">_ python | bash | burp //"
+  ];
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const typedOutputSpan = document.getElementById("typed-output");
+  let typingSpeed = 100;
+
+  function typeEffect() {
+    const currentPhrase = phrases[phraseIndex];
+    if (isDeleting) {
+      typedOutputSpan.textContent = currentPhrase.substring(0, charIndex - 1);
+      charIndex--;
+      typingSpeed = 60;
+    } else {
+      typedOutputSpan.textContent = currentPhrase.substring(0, charIndex + 1);
+      charIndex++;
+      typingSpeed = 100;
+    }
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      isDeleting = true;
+      typingSpeed = 1800;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      typingSpeed = 300;
+    }
+    setTimeout(typeEffect, typingSpeed);
+  }
+
+  // smooth scroll for anchor links
+  document.querySelectorAll('.nav-links a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // hover glitch effect on project cards
+  const projectCards = document.querySelectorAll('.project-card');
+  projectCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'all 0.2s';
+    });
+  });
+
+  // console signature
+  console.log("%c[ HASH // WEB EXPLOITATOR // RED TEAM @ Ultrasecure ] — break.web.pwn.all", "color: #ff2222; font-size: 15px; font-family: monospace; font-weight: bold");
+  
+  // start typing animation
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(typeEffect, 500);
+  });
+</script>
+</body>
+</html>
